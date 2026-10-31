@@ -138,12 +138,12 @@ class MemoryStore private constructor(ctx: Context) {
     private fun readMessages(f: File): MutableList<ChatMessage> = try {
         if (!f.exists()) mutableListOf()
         else gson.fromJson(f.readText(), object : TypeToken<MutableList<ChatMessage>>() {}.type) ?: mutableListOf()
-    } catch (e: Exception) { mutableListOf() }
+    } catch (e: Exception) { mutableListOf<ChatMessage>() }
 
     private fun readMemories(f: File): MutableList<Memory> = try {
         if (!f.exists()) mutableListOf()
         else gson.fromJson(f.readText(), object : TypeToken<MutableList<Memory>>() {}.type) ?: mutableListOf()
-    } catch (e: Exception) { mutableListOf() }
+    } catch (e: Exception) { mutableListOf<Memory>() }
 
     private fun readProviders(f: File): MutableList<ProviderState> = try {
         if (!f.exists()) mutableListOf()
@@ -153,17 +153,17 @@ class MemoryStore private constructor(ctx: Context) {
                 provider.model = provider.model ?: ""
             }
         }
-    } catch (e: Exception) { mutableListOf() }
+    } catch (e: Exception) { mutableListOf<ProviderState>() }
 
     private fun readStringMap(f: File): MutableMap<String, String> = try {
         if (!f.exists()) mutableMapOf()
         else gson.fromJson(f.readText(), object : TypeToken<MutableMap<String, String>>() {}.type) ?: mutableMapOf()
-    } catch (e: Exception) { mutableMapOf() }
+    } catch (e: Exception) { mutableMapOf<String, String>() }
 
     private fun readBoolMap(f: File): MutableMap<String, Boolean> = try {
         if (!f.exists()) mutableMapOf()
         else gson.fromJson(f.readText(), object : TypeToken<MutableMap<String, Boolean>>() {}.type) ?: mutableMapOf()
-    } catch (e: Exception) { mutableMapOf() }
+    } catch (e: Exception) { mutableMapOf<String, Boolean>() }
 
     private fun readProfile(f: File): UserProfile = try {
         if (!f.exists()) UserProfile()
@@ -180,7 +180,7 @@ class MemoryStore private constructor(ctx: Context) {
     private fun readTraitMap(f: File): MutableMap<String, TraitSetting> = try {
         if (!f.exists()) mutableMapOf()
         else gson.fromJson(f.readText(), object : TypeToken<MutableMap<String, TraitSetting>>() {}.type) ?: mutableMapOf()
-    } catch (e: Exception) { mutableMapOf() }
+    } catch (e: Exception) { mutableMapOf<String, TraitSetting>() }
 
     private fun writeJson(f: File, v: Any) { try { f.writeText(gson.toJson(v)) } catch (e: Exception) {} }
 
